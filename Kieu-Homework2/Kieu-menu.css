@@ -4,7 +4,9 @@
     font-weight: bold;
     background-color: #D5B0AC;
     text-align: center;
+    position: relative;
 }
+
 .menu span {
     display: inline-block; 
     width: 100px;
@@ -14,10 +16,32 @@
     background-color: #9CD08F;
     color: #FFFFFF;
     cursor: pointer;
+
+}
+
+.menu.sub-menu{
+    position: absolute;
+    width: 100px;
+    line-height: 30px;
+    /* margin-top: 1px; */
+    list-style: none;
+}
+
+.sub-menu span {
+    position: relative;
+    display: none;
+}
+
+.menu span:hover > .sub-menu > span{
+    display: block;
+}
+nav nav nav {
+    left: 100%;
+    top: 0;
 }
 
 /* Part 2 */
-.menu_vertical span {
+/* .menu_vertical span {
     background-color: #D5B0AC;
     color: #402E2A;
     font-weight: bold;
@@ -31,4 +55,4 @@
     background-color: #9CD08F;
     color: #FFFFFF;
     cursor: pointer;
-}
+} */
