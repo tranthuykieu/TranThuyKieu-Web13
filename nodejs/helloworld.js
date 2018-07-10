@@ -10,6 +10,8 @@ fileModule.readFileCustom("testModule.json", function(fileData){
     console.log(fileData);
 })
 
+
+
 // Asynchronous
 // console.log("Bat dau ghi file");
 // fs.writeFile("test.txt","Hello world",function(err){
