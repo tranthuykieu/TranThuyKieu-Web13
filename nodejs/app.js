@@ -1,66 +1,58 @@
-const express = require("express");
-const path = require("path");
-const fs = require("fs");
-const hbs = require("express-handlebars");
+const express = require('express');
+const hbs = require('express-handlebars');
+const fs = require('fs');
+const bodyParser = require('body-parser');
+const questionList = require('./questions.json');
 
 let app = express();
 
 app.engine("handlebars", hbs({defaultLayout: "main"}));
 app.set("view engine", "handlebars");
 
+app.use(bodyParser.urlencoded({extended: false}));
 
-app.get('/', function(req, res){
-    res.render("ask", {
-        asf: 'background-color: aqua'
+app.get("/", (req , res) => {
+    let questionRandom = questionList[Math.floor(Math.random()*questionList.length)];
+    res.render("home", {
+        question: questionRandom 
     });
 });
 
-app.get('/ask', function(req, res){
-    res.render("ask", {
-        
+app.get("/ask", (req, res) => {
+    res.render("ask");
+});
+
+app.post("/question/add", (req, res) => {
+    let newQuestion = {
+        content: req.body.questionContent, 
+        yes: 0, 
+        no: 0, 
+        id: questionList.length};
+        questionList.push(newQuestion);
+        fs.writeFileSync('./questions.json', JSON.stringify(questionList));
+        res.redirect('/question/' + newQuestion.id);
+});
+
+app.get("/question/:questionId", (req, res) => {
+    let question = questionList[req.params.questionId];
+    res.render("question", {
+        question,
+        totalVote: question.yes + question.no
     });
 });
 
-app.get('/answer', function(req, res){
-    res.render("answer", {
-
-    });
-});
-
-fs.readFile("question.json", "utf8", function(err, data){
-    if(err) console.log(err)
-    else {
-        app.get('/', function(req, res){
-            res.render("answer")
-        })
-    }
+app.get("/answer/:questionId/:vote", (req, res) => {
+    questionList[req.params.questionId][req.params.vote] += 1;
+    fs.writeFileSync('./questions.json', JSON.stringify(questionList));
+    res.redirect("/question/" + req.params.questionId);
 });
 
 app.use(express.static("public"));
 
-app.listen(2423, function(err) {
-    if (err) console.error(err)
-    else console.log("Server is listening at port: 2423");
+
+app.listen(2423, (err) => {
+    if(err) console.log(err)
+    else console.log("Server start !!");
 });
 
 app.use(express.static("./CSS Style"));
-
-//middleware
-// app.use(function(req, res, next){
-//     console.log("Thu phi em ei");
-//     next();
-// })
-
-// app.get('/picture', function(req, res){
-//     console.log(__dirname);
-//     res.sendfile(__dirname + '/IMG_4945.JPG');
-// });
-
-
-// app.get('/html', function(req, res){
-//     res.sendFile(__dirname + '/Kieu-Homework2/Kieu-menu.html');
-// });
-
-// app.get('/style.css', function(req, res){
-//     res.sendFile(path.resolve(__dirname, "./Kieu-Homework2/Kieu-menu.css"));
-// })

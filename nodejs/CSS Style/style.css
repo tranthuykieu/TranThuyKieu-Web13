@@ -1,7 +1,7 @@
 .header {
-    height: 50px;
+    height: 30px;
     font-size: 16px;
-    background-color: #9b8787;
+    background-color: #c58787;
     color: red;
     font-weight: bold;
     position: relative;
@@ -10,7 +10,7 @@
 .header span {
     display: inline-block;
     width: 100px;
-    line-height: 30px;
+    line-height: 20px;
 }
  
 .ask textarea {
@@ -23,20 +23,30 @@
 .button {
     display: block;
     border: none;
-    border-radius: 10%;
-    width: 100px;
-    line-height: 30px;
+    border-radius: 5%;
+    width: 150px;
+    line-height: 40px;
     font-weight: bold;
     cursor: pointer;
+    font-size: 15px;
 }
 
-#yes {
+#buttonYes {
     background-color: #1484cf;
 }
+
 .button :hover{
     color: white;
 }
-#no {
+#buttonNo {
     background-color: rgb(185, 54, 54);
 }
 
+#otherQuestion {
+    background-color: green;
+}
+
+#otherQuestion :hover{
+    background-color: #79df79;
+    color: white;
+}
