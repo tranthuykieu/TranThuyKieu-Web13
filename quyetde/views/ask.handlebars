@@ -1,0 +1,45 @@
+<h1>
+    Hay dat 1 cau hoi dang co/khong or dung/sai
+</h1>
+
+<form id="questionForm">
+    <textarea name="questionContent" id="question" cols="30" rows="10" maxlength="200"></textarea>
+    <p>con <span id="remain">200</span>/200 ki tu</p>
+
+    <button type="submit">Gui</button>
+</form>
+
+<script>
+    let char = 200;
+    $("#question").on("input", function() {
+        $("#remain").text(char - $("#question").val().length);
+    });
+
+    $("#questionForm").on("submit", function(event){
+        event.preventDefault();
+
+        $.ajax({
+            url: '/api/addquestion', 
+            type: 'POST',
+            data: $("#questionForm").serialize(),
+            success: function(){
+                if(body.success){
+                    window.location.href = `/question/${body.questionId}`;
+                } else {
+                    alert("ERROR");
+
+                }
+            },
+            error: function(body){
+                console.log(body);
+                alert("ERROR");
+            }
+        });
+    });
+
+</script>
+
+
+{{!-- document.getElementById("question").addEventListener("input", function() {
+        document.getElementById("remain").innerText = char - document.getElementById("question").value.length;
+    }); --}}

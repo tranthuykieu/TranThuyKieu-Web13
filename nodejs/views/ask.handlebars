@@ -2,8 +2,15 @@
 
 
 <form action="/question/add" method="POST" class="ask">
-    <textarea name="questionContent" placeholder="Dat cau hoi o day..."></textarea>
-    <p>con 200/200 ki tu</p>
+    <textarea id="question" name="questionContent" placeholder="Dat cau hoi o day..."></textarea>
+    <p>con <span id="remain">200</span>/200 ki tu</p>
 
     <button type="submit">Gui</button>
 </form>
+
+<script>
+    let char = 200;
+    document.getElementById("question").addEventListener("input", function() {
+        document.getElementById("remain").innerText = char - document.getElementById("question").value.length;
+    })
+</script>
