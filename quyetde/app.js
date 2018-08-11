@@ -47,7 +47,7 @@ app.get("/answer/:questionId/:vote", (req, res) => {
         else if(!questionFound){
             console.log("not found")
         }
-        else {
+        else {r
             questionFound[req.params.vote] += 1;
 
             questionFound.save(function(err){

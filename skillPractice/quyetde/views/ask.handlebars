@@ -1,0 +1,21 @@
+<h1>Hay dat 1 cau hoi</h1>
+
+{{!-- action chua duong dan api --}}
+<form action="/question/add" method="POST">
+    <textarea name="questionContent" id="question" cols="30" rows="10" maxlength="200"></textarea>
+    <p>con <span id="remain">200</span> ki tu</p>
+
+    <button type="submit">Gui</button>
+</form>
+
+{{!-- JavaScript --}}
+<script>
+    let char = 200; 
+    // id ko co dau #
+    // keyup tuong tu input, nhung ko tac dung khi user dung chuot de thao tac
+    document.getElementById('question').addEventListener('input', () => {
+        //innerText: gan string ben trong bang 1 string khac
+        document.getElementById('remain').innerText = char - document.getElementById('question').value.length;
+    });
+
+</script>
