@@ -24,5 +24,5 @@ mongoose.connect("mongodb://localhost/techkids-hotgirl", (err) => {
 const port = 2423;
 app.listen(port, (err) => {
     if(err) console.error(err)
-    else console.log(`server is listening at ${port}`);
+    else console.log(`Server is listening at ${port}`);
 });

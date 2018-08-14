@@ -1,7 +1,8 @@
 const express = require('express');
 const apiRouter = express.Router();
 
-const userRouter = require('./userRouter.js');
+const userRouter = require('./userApiRouter.js');
+const imageRouter = require('./imageApiRouter.js');
 
 apiRouter.use("/", (req, res, next) => {
     console.log("MiddleWare");
@@ -13,5 +14,6 @@ apiRouter.get("/", (req, res) => {
 });
 
 apiRouter.use("/users", userRouter);
+apiRouter.use("/images", imageRouter);
 
 module.exports = apiRouter;
